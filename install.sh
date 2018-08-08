@@ -127,23 +127,6 @@ fi
 
 waitForKeyPress
 
-# INSTALLING FIREFOX
-
-echo "Checking if Firefox is already installed"
-if find /usr/local/bin/firefox ; then
-   echo "Firefox is already downloaded"
-else
-   echo "Downloading firefox ${FIREFOX_VERSION}"
-   wget http://ftp.mozilla.org/pub/firefox/releases/${FIREFOX_VERSION}/linux-x86_64/es-ES/${FIREFOX_TAR}
-   echo "Decompressing firefox"
-   tar -xvf ${FIREFOX_TAR}
-   echo "Deleting compressed firefox"
-   rm -f ${FIREFOX_TAR}*
-   echo "Moving firefox to /usr/local/firefox"
-   rm -rf /usr/local/firefox
-   mv firefox /usr/local/firefox
-   echo "Creating symbolic link to execute firefox: /url/local/bin/firefox"
-   ln -s /usr/local/firefox/firefox /usr/local/bin/firefox
-fi
+$INSTALL firefox
 
 waitForKeyPress
