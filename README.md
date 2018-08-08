@@ -1,3 +1,17 @@
-README del proyecto
+# SERPENT :snake:
 
-MAVEN http://www-us.apache.org/dist/maven/maven-3/3.0.5/binaries/apache-maven-3.0.5-bin.tar.gz
+## Installation
+
+For installing SERPENT on CentOS, run the following commands:
+
+```
+sudo ./install.sh
+source /etc/profile.d/maven.sh
+```
+
+Execute the app with
+
+```
+./selenium-start.sh
+mvn install
+```
