@@ -29,15 +29,7 @@ fi
 
 yum update -y
 
-# INSTALLING DEPENDENCIES FOR THE INSTALLATION PROCESS
-echo "Installing bzip2"
-$INSTALL bzip2
-echo "[ OK ] bxip2 installed"
-
-echo "Installing gtk3"
 $INSTALL gtk+-devel gtk3-devel
-echo "[ OK ] gtk3 installed"
-
 waitForKeyPress
 
 # MAVEN
