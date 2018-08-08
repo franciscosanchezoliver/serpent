@@ -65,27 +65,8 @@ echo "[ OK ] ${JAVA_VERSION} installed"
 
 waitForKeyPress
 
-# INSTALLING MAVEN
-echo "Checking if maven is already installed..."
-if find /usr/local/src/apache-maven/bin/mvn ; then
-   echo "maven is already installed"
-else
-   echo "Installing maven ${MAVEN_VERSION}"
-   wget "http://www-us.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/${MAVEN_TAR}"
-   tar -xvf ${MAVEN_TAR}
-   rm ${MAVEN_TAR}
-   mv "apache-maven-${MAVEN_VERSION}" "/usr/local/src/apache-maven"
-
-   # Writing init script for maven
-   MAVEN_SH=/etc/profile.d/maven.sh
-   echo "# apache maven environment variables" > ${MAVEN_SH}
-   echo "# MAVEN_HOME for maven 1  - M2_HOME for maven 2" >> ${MAVEN_SH}
-   echo "export M2_HOME=/usr/local/src/apache-maven" >> ${MAVEN_SH}
-   echo "export PATH=\${M2_HOME}/bin:\${PATH}" >> ${MAVEN_SH}
-   chmod +x ${MAVEN_SH}
-
-   echo "[ OK ] ${MAVEN_VERSION} installed. Remember to source ${MAVEN_SH}"
-fi
+wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+yum install apache-maven
 
 waitForKeyPress
 
