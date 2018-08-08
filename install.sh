@@ -69,19 +69,6 @@ echo "[ OK ] Xvfb ${XVFB_VERSION} installed"
 
 waitForKeyPress
 
-# INSTALLING SELENIUM SERVER
-echo "Checking if Selenium Server is already installed..."
-if find /opt/selenium-server-standalone.jar ; then
-   echo "Selenium is already downloaded"
-else
-   echo "Downloading Selenium..."
-   wget http://selenium-release.storage.googleapis.com/${SELENIUM_MAJOR_MINOR}/${SELENIUM_JAR}
-   sudo mv ${SELENIUM_JAR} /opt/selenium-server-standalone.jar
-   echo "[ OK ] Selenium Server installed"
-fi
-
-waitForKeyPress
-
 # INSTALLING GECKODRIVER
 echo "Checking if Geckodriver is already installed..."
 if find /usr/local/bin/geckodriver ; then
