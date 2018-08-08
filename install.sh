@@ -30,10 +30,6 @@ fi
 yum update -y
 
 # INSTALLING DEPENDENCIES FOR THE INSTALLATION PROCESS
-echo "Installing wget"
-$INSTALL wget
-echo "[ OK ] wget installed"
-
 echo "Installing bzip2"
 $INSTALL bzip2
 echo "[ OK ] bxip2 installed"
@@ -45,7 +41,8 @@ echo "[ OK ] gtk3 installed"
 waitForKeyPress
 
 # MAVEN
-wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+curl -OL http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo
+mv epel-apache-maven.repo /etc/yum.repos.d/epel-apache-maven.repo
 $INSTALL apache-maven
 
 waitForKeyPress
@@ -55,20 +52,14 @@ $INSTALL xorg-x11-server-Xvfb-${XVFB_VERSION}
 waitForKeyPress
 
 # INSTALLING GECKODRIVER
-echo "Checking if Geckodriver is already installed..."
-if find /usr/local/bin/geckodriver ; then
-   echo "Geckodriver is already installed"
-else
-   echo "Downloading GeckoDriver..."
-   wget http://github.com/mozilla/geckodriver/releases/download/${GECKODRIVER_VERSION}/${GECKODRIVER_TAR}
-   echo "Decompressing Geckodriver"
+if ! find /usr/local/bin/geckodriver ; then
+   curl -OL https://github.com/mozilla/geckodriver/releases/download/${GECKODRIVER_VERSION}/${GECKODRIVER_TAR}
    tar -xvf ${GECKODRIVER_TAR}
-   echo "Deleting compressed Geckodriver"
    rm -f ${GECKODRIVER_TAR}
-   echo "Moving Geckodriver to /usr/local/bin/geckodriver"
    sudo mv geckodriver /usr/local/bin/geckodriver
-   echo "[ OK ] Geckodriver installed"
 fi   
+
+waitForKeyPress
 
 # INSTALLING FIREFOX
 $INSTALL firefox
