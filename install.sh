@@ -1,13 +1,9 @@
-#/bin/bash
+#!/bin/bash
 
 #**** SELENIUM ****
 SELENIUM_MAJOR_MINOR=2.53
 SELENIUM_PATCH=0
 SELENIUM_JAR=selenium-server-standalone-${SELENIUM_MAJOR_MINOR}.${SELENIUM_PATCH}.jar
-
-#**** FIREFOX ****
-FIREFOX_VERSION=57.0.1
-FIREFOX_TAR=firefox-${FIREFOX_VERSION}.tar.bz2
 
 #**** GECKODRIVER ****
 GECKODRIVER_VERSION=v0.21.0
@@ -15,10 +11,6 @@ GECKODRIVER_TAR=geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz
 
 #**** JAVA ****
 JAVA_VERSION=java-1.8.0-openjdk*
-
-#**** MAVEN ****
-MAVEN_VERSION=3.0.5
-MAVEN_TAR="apache-maven-${MAVEN_VERSION}-bin.tar.gz"
 
 #**** XVFB ****
 XVFB_VERSION=1.19.5
@@ -66,7 +58,7 @@ echo "[ OK ] ${JAVA_VERSION} installed"
 waitForKeyPress
 
 wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
-yum install apache-maven
+$INSTALL apache-maven
 
 waitForKeyPress
 
