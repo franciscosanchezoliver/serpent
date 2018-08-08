@@ -28,6 +28,21 @@ INSTALL="yum install -y"
 #Stop script on first error
 set -e
 
+waitForKeyPress()
+{
+   if $DEBUG ; then  
+      read -p "Press enter to continue"
+   fi
+}
+
+DEBUG=false
+
+if [ $# -gt 0 ]; then
+   if [ $1 = "-d" ] || [ $1 = "--debug" ] ; then
+      DEBUG=true
+   fi
+fi
+
 # INSTALLING JDK
 echo "Checking if jdk is already installed..."
 if yum list installed java-1.8.0* >/dev/null 2>&1; then
@@ -38,6 +53,8 @@ else
    $INSTALL ${JAVA_VERSION}
    echo "[ OK ] ${JAVA_VERSION} installed"
 fi
+
+waitForKeyPress
 
 # INSTALLING MAVEN
 echo "Checking if maven is already installed..."
@@ -61,6 +78,8 @@ else
    echo "[ OK ] ${MAVEN_VERSION} installed. Remember to source ${MAVEN_SH}"
 fi
 
+waitForKeyPress
+
 # INSTALING Xvfb
 echo "Checking if X Virtual Framebuffer (Xvfb) is installed..."
 if yum list installed xorg-* >/dev/null 2>&1; then
@@ -71,7 +90,7 @@ else
    echo "[ OK ] Xvfb ${XVFB_VERSION} installed"
 fi
 
-read -p "Press enter to continue"
+waitForKeyPress
 
 # INSTALING SELENIUM SERVER
 echo "Checkin if Selenium Server is already installed..."
@@ -84,7 +103,7 @@ else
    echo "[ OK ] Selenium Server installed"
 fi
 
-read -p "Press enter to continue"
+waitForKeyPress
 
 # INSTALLING GECKODRIVER
 echo "Checking if Geckodriver is already installed..."
@@ -101,7 +120,8 @@ else
    sudo mv geckodriver /usr/local/bin/geckodriver
    echo "[ OK ] Geckodriver installed"
 fi   
-read -p "Press enter to continue"
+
+waitForKeyPress
 
 # INSTALLING FIREFOX
 
@@ -122,4 +142,4 @@ else
    ln -s /usr/local/firefox/firefox /usr/local/bin/firefox
 fi
 
-echo "[ OK ] Instalation completed"
+waitForKeyPress
