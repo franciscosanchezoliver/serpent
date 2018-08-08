@@ -1,16 +1,8 @@
 #!/bin/bash
 
-#**** SELENIUM ****
-SELENIUM_MAJOR_MINOR=2.53
-SELENIUM_PATCH=0
-SELENIUM_JAR=selenium-server-standalone-${SELENIUM_MAJOR_MINOR}.${SELENIUM_PATCH}.jar
-
 #**** GECKODRIVER ****
 GECKODRIVER_VERSION=v0.21.0
 GECKODRIVER_TAR=geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz
-
-#**** JAVA ****
-JAVA_VERSION=java-1.8.0-openjdk*
 
 #**** XVFB ****
 XVFB_VERSION=1.19.5
@@ -50,23 +42,16 @@ echo "Installing gtk3"
 $INSTALL gtk+-devel gtk3-devel
 echo "[ OK ] gtk3 installed"
 
-# INSTALLING JDK
-echo "Installing ${JAVA_VERSION}"
-$INSTALL ${JAVA_VERSION}
-echo "[ OK ] ${JAVA_VERSION} installed"
-
 waitForKeyPress
 
+# MAVEN
 wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
 $INSTALL apache-maven
 
 waitForKeyPress
 
 # INSTALLING Xvfb
-echo "Installing Xvfb " ${XVFB_VERSION}
 $INSTALL xorg-x11-server-Xvfb-${XVFB_VERSION}
-echo "[ OK ] Xvfb ${XVFB_VERSION} installed"
-
 waitForKeyPress
 
 # INSTALLING GECKODRIVER
@@ -85,8 +70,6 @@ else
    echo "[ OK ] Geckodriver installed"
 fi   
 
-waitForKeyPress
-
+# INSTALLING FIREFOX
 $INSTALL firefox
 
-waitForKeyPress
