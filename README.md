@@ -9,9 +9,16 @@ sudo ./install.sh
 source /etc/profile.d/maven.sh
 ```
 
-Execute the app with
+To compile the app:
 
 ```
-./selenium-start.sh
 mvn install
+```
+
+
+To execute the app:
+
+```
+./virtual-screen-start.sh
+mvn exec:java
 ```
